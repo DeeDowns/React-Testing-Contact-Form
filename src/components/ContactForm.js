@@ -40,14 +40,12 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="email" placeholder="bluebill1049@hotmail.com">
-            Email*
-          </label>
+          <label htmlFor="email">Email*</label>
           <input 
             id='email'
             name="email" 
-            type='email'
-            ref={register({ required: true, email: true })} />
+            placeholder="bluebill1049@hotmail.com"
+            ref={register({ required: true })} />
           {errors.email && (
             <p>Looks like there was an error: {errors.email.type}</p>
           )}
