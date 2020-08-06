@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import ContactForm from './ContactForm'
 
 test('Adds user object to page when form is filled out and submitted', () => {
@@ -7,8 +7,19 @@ test('Adds user object to page when form is filled out and submitted', () => {
     render(<ContactForm /> )
     
     //query for the different inputs
-    const firstNameInput = screen.findByLabelText(/first name/i)
-    const lastNameInput = screen.findByLabelText(/last name/i)
-    const emailInput = screen.findByLabelText(/email/i)
-    const messageInput = screen.findByLabelText(/message/i)
+    const firstNameInput = screen.getByLabelText(/first name/i)
+    const lastNameInput = screen.getByLabelText(/last name/i)
+    const emailInput = screen.getByLabelText(/email/i)
+    const messageInput = screen.getByLabelText(/message/i)
+
+    //fill out inputs
+    fireEvent.change(firstNameInput, { target: { value: 'Dee' } })
+    fireEvent.change(lastNameInput, { target: { value: 'Downs' } })
+    fireEvent.change(emailInput, { target: { value: 'someemail@email.com' } })
+    fireEvent.change(messageInput, { target: { value: 'a message' } })
+
+    //query for the submit button
+    const submitButton = screen.getByRole('button', { name: 'Submit'})
+
+
 })
