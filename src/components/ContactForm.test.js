@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import ContactForm from './ContactForm'
+import { act } from "react-dom/test-utils";
 
 test('Adds user object to page when form is filled out and submitted', async () => {
     //render Contact Form
@@ -17,6 +18,7 @@ test('Adds user object to page when form is filled out and submitted', async () 
     fireEvent.change(lastNameInput, { target: { value: 'Downs' } })
     fireEvent.change(emailInput, { target: { value: 'someemail@email.com' } })
     fireEvent.change(messageInput, { target: { value: 'a message' } })
+    
 
     //query for the submit button
     const submitButton = screen.getByRole('button', { name: 'Submit'})
@@ -31,17 +33,3 @@ test('Adds user object to page when form is filled out and submitted', async () 
     expect(await screen.findByText(/a message/i)).toBeInTheDocument()
 
 })
-
-
-// test('errors load to the screen when form is filled out incorrectly', () => {
-//     //render ContactForm 
-//     render(<ContactForm />)
-
-//     const firstNameInput = screen.getByLabelText(/first name/i)
-
-//     fireEvent.change(firstNameInput, { target: { value: '' } })
-
-
-
-
-// })
